@@ -12,42 +12,38 @@ namespace Ecommerce.Infrastructure.Brand
             _context = context;
         }
 
-        public async Task<Brands> AddBrand(Brands brands)
+        public async Task<Brands> CreateBrandAsync(Brands brand)
         {
-            var brand = new Brands
+            var result = await _context.brands.AddAsync(brand);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task DeleteBrandAsync(int id)
+        {
+            var brand = await GetBrandByIdAsync(id);
+            if (brand != null)
             {
-                brand_name = brands.brand_name
-            };
-            var BrandToAdd = _context.brands.Add(brand);
-            await _context.SaveChangesAsync();
-            return BrandToAdd.Entity;
+                _context.brands.Remove(brand);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public async Task<Brands> DeleteBrand(int id)
-        {
-            var BrandToDelete = await _context.brands.FirstOrDefaultAsync(x => x.brand_id == id);
-            _context.brands.Remove(BrandToDelete!);
-            await _context.SaveChangesAsync();
-            return null!;
-        }
-
-        public async Task<List<Brands>> GetAllBrands()
+        public async Task<IEnumerable<Brands>> GetAllBrandsAsync()
         {
             return await _context.brands.ToListAsync();
         }
 
-        public async Task<Brands> GetBrandById(int id)
+        public async Task<Brands> GetBrandByIdAsync(int id)
         {
-            var brand = await _context.brands.FirstOrDefaultAsync(x => x.brand_id == id);
-            return brand!;
+            var result = await _context.brands.FindAsync(id);
+            return result!;
         }
 
-        public async Task<Brands> UpdateBrand(Brands brand)
+        public async Task UpdateBrandAsync(Brands brand)
         {
-            var BrandToUpdate = await _context.brands.FirstOrDefaultAsync(x => x.brand_id == brand.brand_id);
-            BrandToUpdate!.brand_name = brand.brand_name;
+            _context.Entry(brand).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return null!;
         }
     }
 }

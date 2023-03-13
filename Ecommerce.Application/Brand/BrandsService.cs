@@ -4,34 +4,35 @@ namespace Ecommerce.Application.Brand
 {
     public class BrandsService : IBrandsService
     {
-        private readonly IBrandsRepository _brandRepository;
+        private readonly IBrandsRepository _repository;
         public BrandsService(IBrandsRepository brandRepository)
         {
-            _brandRepository = brandRepository;
-        }
-        Task<List<Brands>> IBrandsService.GetAllBrands()
-        {
-            return _brandRepository.GetAllBrands();
+            _repository = brandRepository;
         }
 
-        Task<Brands> IBrandsService.GetBrandById(int id)
+        public async Task<Brands> CreateBrandAsync(Brands brand)
         {
-            return _brandRepository.GetBrandById(id);
+            return await _repository.CreateBrandAsync(brand);
         }
 
-        Task<Brands> IBrandsService.UpdateBrand(Brands brand)
+        public async Task DeleteBrandAsync(int id)
         {
-            return _brandRepository.UpdateBrand(brand);
+            await _repository.DeleteBrandAsync(id);
         }
 
-        Task<Brands> IBrandsService.DeleteBrand(int id)
+        public async Task<IEnumerable<Brands>> GetAllBrandsAsync()
         {
-            return _brandRepository.DeleteBrand(id);
+            return await _repository.GetAllBrandsAsync();
         }
 
-        public Task<Brands> AddBrand(Brands brands)
+        public async Task<Brands> GetBrandByIdAsync(int id)
         {
-            return _brandRepository.AddBrand(brands);
+            return await _repository.GetBrandByIdAsync(id);
+        }
+
+        public async Task UpdateBrandAsync(Brands brand)
+        {
+            await _repository.UpdateBrandAsync(brand);
         }
     }
 }

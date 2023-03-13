@@ -4,10 +4,10 @@ namespace Ecommerce.Application.Brand
 {
     public interface IBrandsRepository
     {
-        Task<List<Brands>> GetAllBrands();
-        Task<Brands> GetBrandById(int id);
-        Task<Brands> AddBrand(Brands brands);
-        Task<Brands> UpdateBrand(Brands brand);
-        Task<Brands> DeleteBrand(int id);
+        Task<IEnumerable<Brands>> GetAllBrandsAsync();
+        Task<Brands> GetBrandByIdAsync(int id);
+        Task<Brands> CreateBrandAsync(Brands brand);
+        Task UpdateBrandAsync(Brands brand);
+        Task DeleteBrandAsync(int id);
     }
 }

@@ -8,17 +8,53 @@ namespace Ecommerce.Presentation.Controllers
     [ApiController]
     public class BrandsController : ControllerBase
     {
-        private readonly IBrandsService _brandsService;
+        private readonly IBrandsService _service;
         public BrandsController(IBrandsService brandsService)
         {
-            _brandsService = brandsService;
+            _service = brandsService;
         }
 
         [HttpGet]
-        public ActionResult<List<Brands>> GetBrands()
+        public async Task<ActionResult<IEnumerable<Brands>>> GetAllBrandsAsync()
         {
-            var brands = _brandsService.GetAllBrands();
+            var brands = await _service.GetAllBrandsAsync();
             return Ok(brands);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Brands>> GetBrandByIdAsync(int id)
+        {
+            var brand = await _service.GetBrandByIdAsync(id);
+            if (brand == null)
+            {
+                return NotFound();
+            }
+            return Ok(brand);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Brands>> CreateBrandAsync(Brands brand)
+        {
+            var result = await _service.CreateBrandAsync(brand);
+            return CreatedAtAction(nameof(GetBrandByIdAsync), new { id = result.brand_id }, result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateBrandAsync(int id, Brands brand)
+        {
+            if (id != brand.brand_id)
+            {
+                return BadRequest();
+            }
+            await _service.UpdateBrandAsync(brand);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteBrandAsync(int id)
+        {
+            await _service.DeleteBrandAsync(id);
+            return NoContent();
         }
     }
 }
