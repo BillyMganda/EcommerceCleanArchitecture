@@ -28,5 +28,10 @@ namespace Ecommerce.Application.Brand
         {
             return _brandRepository.DeleteBrand(id);
         }
+
+        public Task<Brands> AddBrand(Brands brands)
+        {
+            return _brandRepository.AddBrand(brands);
+        }
     }
 }

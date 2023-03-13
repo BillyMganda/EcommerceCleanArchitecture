@@ -12,6 +12,17 @@ namespace Ecommerce.Infrastructure.Brand
             _context = context;
         }
 
+        public async Task<Brands> AddBrand(Brands brands)
+        {
+            var brand = new Brands
+            {
+                brand_name = brands.brand_name
+            };
+            var BrandToAdd = _context.brands.Add(brand);
+            await _context.SaveChangesAsync();
+            return BrandToAdd.Entity;
+        }
+
         public async Task<Brands> DeleteBrand(int id)
         {
             var BrandToDelete = await _context.brands.FirstOrDefaultAsync(x => x.brand_id == id);

@@ -6,6 +6,7 @@ namespace Ecommerce.Application.Brand
     {
         Task<List<Brands>> GetAllBrands();        
         Task<Brands> GetBrandById(int id);
+        Task<Brands> AddBrand(Brands brands);
         Task<Brands> UpdateBrand(Brands brand);
         Task<Brands> DeleteBrand(int id);
     }
