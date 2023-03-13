@@ -8,7 +8,7 @@ namespace Ecommerce.Infrastructure
     {
         public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
         {
-            services.AddDbContext<>(c => c.UseSqlServer(configuration.GetConnectionString("MSSQLServerConnection")));
+            services.AddDbContext<DataContext>(c => c.UseSqlServer(configuration.GetConnectionString("MSSQLServerConnection")));
         }
     }
 }
