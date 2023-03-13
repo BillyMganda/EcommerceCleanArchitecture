@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //MINE
+
 builder.Services.AddDbContext<EcommerceDataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLServerConnection")));
 builder.Services.AddScoped<IBrandsService, BrandsService>();
 builder.Services.AddScoped<IBrandsRepository, BrandsRepository>();

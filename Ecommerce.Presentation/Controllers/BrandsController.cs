@@ -1,5 +1,7 @@
 ﻿using Ecommerce.Application.Brand;
+using Ecommerce.Application.Brand.Queries;
 using Ecommerce.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Presentation.Controllers
@@ -9,15 +11,21 @@ namespace Ecommerce.Presentation.Controllers
     public class BrandsController : ControllerBase
     {
         private readonly IBrandsService _service;
-        public BrandsController(IBrandsService brandsService)
+        private readonly IMediator _mediator;
+        public BrandsController(IBrandsService brandsService, IMediator mediator)
         {
             _service = brandsService;
+            _mediator = mediator;
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Brands>>> GetAllBrandsAsync()
         {
-            var brands = await _service.GetAllBrandsAsync();
+            //var brands = await _service.GetAllBrandsAsync();
+            //return Ok(brands);
+
+            var brands = await _mediator.Send(new GetAllBrandsQuery());
             return Ok(brands);
         }
 

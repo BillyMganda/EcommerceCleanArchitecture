@@ -1,13 +1,14 @@
 ﻿using Ecommerce.Domain.Entities;
+using MediatR;
 
 namespace Ecommerce.Application.Brand
 {
     public class BrandsService : IBrandsService
     {
-        private readonly IBrandsRepository _repository;
+        private readonly IBrandsRepository _repository;        
         public BrandsService(IBrandsRepository brandRepository)
         {
-            _repository = brandRepository;
+            _repository = brandRepository;            
         }
 
         public async Task<Brands> CreateBrandAsync(Brands brand)
