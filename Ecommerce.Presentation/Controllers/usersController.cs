@@ -1,7 +1,5 @@
-﻿using Ecommerce.Application.Repositories;
-using Ecommerce.Application.Services;
+﻿using Ecommerce.Application.Services;
 using Ecommerce.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Presentation.Controllers
