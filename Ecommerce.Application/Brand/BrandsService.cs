@@ -4,8 +4,8 @@ namespace Ecommerce.Application.Brand
 {
     public class BrandsService : IBrandsService
     {
-        private readonly IbrandsRepository _brandRepository;
-        public BrandsService(IbrandsRepository brandRepository)
+        private readonly IBrandsRepository _brandRepository;
+        public BrandsService(IBrandsRepository brandRepository)
         {
             _brandRepository = brandRepository;
         }

@@ -2,7 +2,7 @@
 
 namespace Ecommerce.Application.Brand
 {
-    public interface IbrandsRepository
+    public interface IBrandsRepository
     {
         Task<List<Brands>> GetAllBrands();
         Task<Brands> GetBrandById(int id);
