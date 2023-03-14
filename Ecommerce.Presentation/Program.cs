@@ -1,3 +1,4 @@
+using Ecommerce.Application;
 using Ecommerce.Application.Brand;
 using Ecommerce.Infrastructure;
 using Ecommerce.Infrastructure.Brand;
@@ -10,9 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //MINE
-
 builder.Services.AddDbContext<EcommerceDataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLServerConnection")));
-builder.Services.AddScoped<IBrandsService, BrandsService>();
+builder.Services.AddApplication(); // DI in application layer
 builder.Services.AddScoped<IBrandsRepository, BrandsRepository>();
 
 
