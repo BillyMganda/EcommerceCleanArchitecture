@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 //MINE
 builder.Services.AddDbContext<EcommerceDataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQLServerConnection")));
 builder.Services.AddApplication(); // DI in application layer
-builder.Services.AddScoped<IBrandsRepository, BrandsRepository>();
+builder.Services.AddInfrastructure(); // DI in infrastructure layer
 
 
 var app = builder.Build();

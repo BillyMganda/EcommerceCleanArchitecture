@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ecommerce.Application.Brand;
+using Ecommerce.Infrastructure.Brand;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ecommerce.Infrastructure
 {
-    internal class DependencyInjection
+    public static class DependencyInjection
     {
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        {
+            services.AddScoped<IBrandsRepository, BrandsRepository>();
+
+            return services;
+        }
     }
 }
