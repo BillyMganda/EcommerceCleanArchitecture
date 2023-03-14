@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Application.Brand;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Ecommerce.Application
 {
@@ -10,7 +11,8 @@ namespace Ecommerce.Application
         {
             services.AddScoped<IBrandsService, BrandsService>();
 
-            services.AddMediatR(typeof(DependencyInjection).Assembly);
+            //services.AddMediatR(typeof(DependencyInjection).Assembly);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 
             return services;
