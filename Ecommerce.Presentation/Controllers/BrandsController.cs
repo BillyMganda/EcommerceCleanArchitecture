@@ -22,17 +22,16 @@ namespace Ecommerce.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Brands>>> GetAllBrandsAsync()
         {
-            //var brands = await _service.GetAllBrandsAsync();
-            //return Ok(brands);
-
             var brands = await _mediator.Send(new GetAllBrandsQuery());
             return Ok(brands);
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ActionName(nameof(GetBrandByIdAsync))]
         public async Task<ActionResult<Brands>> GetBrandByIdAsync(int id)
-        {
-            var brand = await _service.GetBrandByIdAsync(id);
+        {            
+            var brand = await _mediator.Send(new GetBrandByIdQuery { brand_id = id});
             if (brand == null)
             {
                 return NotFound();
