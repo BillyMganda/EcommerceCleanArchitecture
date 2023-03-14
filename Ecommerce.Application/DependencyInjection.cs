@@ -10,8 +10,7 @@ namespace Ecommerce.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IBrandsService, BrandsService>();
-
-            //services.AddMediatR(typeof(DependencyInjection).Assembly);
+            
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 
